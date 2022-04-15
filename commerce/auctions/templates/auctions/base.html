@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+            <title>{% block title %}Commerce{% endblock %}</title>
+                <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    </head>
+<body>
+    <div id="header">
+        <a href="/" class="logo">Commerce</a>
+    </div>
+    <div id="subheader">
+        <div class="favorite">
+            Your favorites is empty.
+        </div>
+    </div>
+    <div id="sidebar">
+        <h3>Categories</h3>
+        <ul>
+            <li {% if not category %}class="selected"{% endif %}>
+                <a href="{% url 'auctions:auctions_list' %}">All</a>
+            </li>
+            {% for c in categories %}
+            <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+                <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

@@ -1,3 +1,5 @@
+# comment
+from django.urls import reverse
 from django.db import models
 
 
@@ -12,6 +14,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('auctions:auctions_list_by_category',
+                       args=[self.slug])
 
 
 class Auction(models.Model):
@@ -32,3 +38,6 @@ class Auction(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('auctions:auction_detail',
+                       args=[self.id, self.slug])

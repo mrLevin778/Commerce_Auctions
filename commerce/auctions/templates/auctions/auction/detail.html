@@ -1,0 +1,21 @@
+{% extends "auctions/base.html" %}
+{% load static %}
+
+{% block title %}
+  {{ auction.name }}
+{% endblock %}
+
+{% block content %}
+  <div class="auction-detail">
+    <h1>{{ auction.name }}</h1>
+    <img src="{% if auctions.image %}{{ auctions.image.url }}{% else %}
+    {% static "img/no_image.png" %}{% endif %}">
+        <h2>
+            <a href="{{ auctions.category.get_absolute_url }}">
+            {{ auction.category }}
+            </a>
+        </h2>
+      <p class="start_price">${{ auction.start_price }}</p>
+    {{ auction.description }}
+  </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "auctions/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Auctions{% endif %}
+{% endblock %}
+{% block content %}
+    <div id="main" class="auctions-list">
+        <h1>{% if category %}{{ category.name }}{% else %}Auctions{% endif %}</h1>
+        {% for auction in auctions %}
+            <div class="item">
+                <a href="{{ auction.get_absolute_url }}">
+                    <img src="{% if auctions.image %}{{ auctions.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}">
+                </a><br>
+                <a href="{{ auction.get_absolute_url }}">{{ auction.name }}</a><br>
+                $ {{ auction.start_price }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
